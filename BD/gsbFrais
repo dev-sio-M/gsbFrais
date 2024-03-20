@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `FicheFrais` (
   `idEtat` char(2) DEFAULT 'CR',
   PRIMARY KEY (`idVisiteur`,`mois`),
   FOREIGN KEY (`idEtat`) REFERENCES Etat(`id`),
-  FOREIGN KEY (`idVisiteur`) REFERENCES Visiteur(`id`)
+  FOREIGN KEY (`id`) REFERENCES Visiteur(`id`)
 ) ENGINE=InnoDB;
 
 
