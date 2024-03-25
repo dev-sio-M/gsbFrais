@@ -1,10 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\c_connexion;
-use App\Http\Controllers\c_connexionComptable;
-use App\Http\Controllers\cConsultFichesFrais;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,9 +11,20 @@ use App\Http\Controllers\cConsultFichesFrais;
 |
 */
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\c_connexion;
+use App\Http\Controllers\c_connexionComptable;
+use App\Http\Controllers\cConsultFichesFrais;
+use App\Http\Controllers\comptableConsulterFicheFrais;
+
+
+/*Accueil*/
 Route::get('/', function () {
     return view('v_accueil');
 });
+
+
+
 
 /*Visiteur médical*/
 Route::get('/visiteurMedical/v_connexion', 'App\Http\Controllers\c_connexion@demandeConnexionVisiteur')->name('demandeConnexionVisiteur');
@@ -29,14 +35,16 @@ Route::get('/visiteurMedical/v_sommaire', function () {
     return view('visiteurMedical.v_sommaire');
 });
 
-Route::post('/validerConsultation', 'App\Http\Controllers\cConsultFichesFrais@validerConsultation')->name('validerConsultation');
 
 Route::get('/visiteurMedical/consulterFichesFrais', function () {
     return view('visiteurMedical.consulterFichesFrais');
 });
 
+Route::post('/validerConsultation', 'App\Http\Controllers\cConsultFichesFrais@validerConsultation')->name('validerConsultation');
 
-//~ /*Comptable*/
+
+
+/*Comptable*/
 Route::get('/comptable/v_connexionComptable', 'App\Http\Controllers\c_connexionComptable@demandeConnexionComptable')->name('demandeConnexionComptable');
 
 Route::post('/comptable/v_connexionComptable', 'App\Http\Controllers\c_connexionComptable@valideConnexionComptable')->name('valideConnexionComptable');
@@ -45,11 +53,12 @@ Route::get('/comptable/v_sommaireComptable', function () {
     return view('comptable.v_sommaireComptable');
 });
 
+Route::get('/comptable/suivrePaiementFicheFrais', function () {
+    return view('comptable.suivrePaiementFicheFrais');
+});
+
+Route::post('/validerFicheFrais', 'App\Http\Controllers\comptableConsulterFicheFrais@validerFicheFrais')->name('validerFicheFrais');
+
+
+/*Deconnexion*/
 Route::post('/logout', [c_connexion::class, 'logout'])->name('logout');
-
-
-
-
-
-
-
